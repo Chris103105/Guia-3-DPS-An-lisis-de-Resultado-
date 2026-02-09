@@ -1,7 +1,6 @@
-# Simulación de Tienda en React
+# Lista de Productos de Tienda
 
-Este proyecto es una aplicación de lista de productos que permite visualizar un catálogo, agregar nuevos ítems y eliminarlos. Cumple con los requisitos de uso de componentes, props y estado en React.
-
+Este proyecto es una aplicación de lista de productos que permite visualizar un catálogo, agregar nuevos ítems y eliminarlos. 
 ## Requisitos
 - Node.js instalado.
 
