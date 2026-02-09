@@ -1,104 +1,165 @@
-html {
-    background-color: #bbe4e9;
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    background-color: #f4f6f8;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-}
-
-* {
-    font-family: 'Roboto', sans-serif;
+    padding-top: 40px;
 }
 
 .App {
-    margin: 1rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    width: 30rem;
-    max-width: 80%;
-    background-color: white;
+    width: 100%;
+    max-width: 900px; /* Un poco más ancho para que quepa la URL */
+    background-color: #ffffff;
+    padding: 2rem;
+    margin: 0 1rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-h2, h3 {
-    color: #333;
-    text-align: center;
+h2 {
+    color: #2c3e50;
+    text-align: left;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    font-size: 1.5rem;
 }
 
+h3 {
+    color: #555;
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+/* --- Formulario --- */
 .input-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #edeef0;
-    border-radius: 30px;
-    padding: 5px 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 0; /* Quitamos gap para usar bordes compartidos si queremos, o dejarlo simple */
+    background-color: transparent;
+    border: 1px solid #ced4da; /* Borde alrededor de todo el grupo de inputs */
+    border-radius: 4px;
+    overflow: hidden; /* Para que las esquinas no se salgan */
+    margin-bottom: 20px;
+    align-items: stretch;
 }
 
 input {
-    border: none;
-    outline: none;
-    background: transparent;
+    padding: 12px 15px;
+    border: none; /* Quitamos bordes individuales */
+    border-right: 1px solid #ced4da; /* Línea divisoria */
     font-size: 16px;
-    padding: 10px;
-    flex: 1;
-    border-radius: 30px;
+    background-color: #fff;
+    outline: none;
 }
+
+input:focus {
+    background-color: #f8faff; /* Color muy sutil al enfocar */
+}
+
+/* Distribución de espacios en los inputs */
+input[name="productName"] { flex: 2; }
+input[name="imageUrl"] { flex: 2; } /* URL necesita espacio */
+input[name="price"] { flex: 1; border-right: none; } /* El último input no lleva borde derecho */
 
 button {
     cursor: pointer;
+    font-size: 16px;
     border: none;
     color: white;
-    font-size: 20px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.2s;
 }
 
 button.agregar {
-    background-color: #28a745;
+    background-color: #007bff;
+    padding: 0 25px;
+    font-weight: 600;
+    font-size: 24px;
+    border-radius: 0; /* Cuadrado para pegar con los inputs */
 }
+
+button.agregar:hover { background-color: #0056b3; }
 
 button.eliminar {
     background-color: #dc3545;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    margin-left: 15px; /* Separación de la info del producto */
+}
+button.eliminar:hover { background-color: #a71d2a; }
+
+/* --- Lista --- */
+.product-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e1e4e8;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-/* Hover en el botón */
-button.agregar:hover {
-    background-color: #218838;
-    transform: scale(1.1);
-}
-
-button.eliminar:hover {
-    background-color: #c82333;
-    transform: scale(1.1);
-}
-
-.todo-item {
+.row-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #edeef0;
-    border-radius: 10px;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s ease;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e1e4e8;
 }
 
-.todo-item:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
+.row-wrapper:last-child { border-bottom: none; }
+.row-wrapper:hover { background-color: #f8f9fa; }
 
-.todo-text {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    overflow-wrap: break-word;
+/* Estilo interno del ProductItem para que se comporte como fila */
+.product-item {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
 }
+
+/* NUEVO: Estilo para la imagen pequeña */
+.product-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover; /* Para que no se deforme */
+    border-radius: 4px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+    background-color: #f0f0f0;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between; /* Separa nombre y precio */
+}
+
+.product-name {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    min-width: 80px;
+    text-align: right;
+}
+
+.empty-message { text-align: center; padding: 20px; color: #6c757d; }

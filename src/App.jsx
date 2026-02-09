@@ -1,15 +1,16 @@
 import React from 'react';
-import './App.css';
-import Form from './components/Form';
-const App = () => {
+import ProductList from './components/ProductList';
+import './App.css'; 
+
+function App() {
   return (
     <div className="App">
-      <div className="App-content">
-        <h2>
-          Lista de cosas por hacer
-        </h2>
-        <Form />
-      </div>
+      <header style={{ backgroundColor: '#282c34', padding: '20px', color: 'white', textAlign: 'center' }}>
+        <h1>Lista de Productos de Tienda </h1>
+      </header>
+      <main>
+        <ProductList />
+      </main>
     </div>
   );
 }
